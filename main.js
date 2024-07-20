@@ -1,41 +1,31 @@
- document.getElementById('bioForm').addEventListener('submit', function(event) {
-            event.preventDefault()
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('form');
+    const firstNameInput = document.getElementById('fname');
+    const submitButton = form.querySelector('button[type="submit"]');
+
+    
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
 
         
-            let formData = {
-                fname: document.getElementById('fname').value,
-                lname: document.getElementById('lname').value
-            };
-
-          
-            let apiUrl = 'https://jsonplaceholder.typicode.com/posts';
-
-            
-            fetch(apiUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData)
-            })
+        fetch('https://randomuser.me/api/')
             .then(response => response.json())
             .then(data => {
-                console.log('Success:', data);
                 
-                alert('Form submitted successfully!');
-                
-                document.getElementById('fname').value = '';
-                document.getElementById('lname').value = '';
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-                alert('Error submitting form. Please try again.');
-            });
-        });
+                const firstName = data.results[0].name.first;
 
-        // Function to handle logout button click
-        function logout() {
-            // Example logout functionality (replace with actual logout process)
-            alert('Logged out successfully!');
-        }
-    </script>
+                
+                firstNameInput.value = firstName;
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    });
+
+   
+    const logoutButton = document.querySelector('button:contains("Logout")');
+    logoutButton.addEventListener('click', function() {
+        // Placeholder action for logout button
+        alert('Logout functionality to be implemented.');
+    });
+});
