@@ -1,22 +1,22 @@
-const userData = {
-  "users": [
-    {
-      "id": 1,
-      "fname": "John",
-      "lname": "Doe",
-    },
-    {
-      "id": 2,
-      "fname": "Jane",
-      "lname": "Doe",
-    },
-    {
-      "id": 3,
-      "fname": "Raymond",
-      "lname": "sang",
-    }
-  ]
-};
+
+fetch('http://localhost:3000/posts')
+            .then(response => response.json())
+            .then(data => {
+                console.log('Posts:', data);
+             
+                data.forEach(post => {
+                    const postElement = document.createElement('div');
+                    postElement.textContent = `${post.title} by ${post.author}`;
+                    document.body.appendChild(postElement);
+                });
+            })
+            .catch(error => console.error('Error fetching data:', error));
+
+        
+        fetch('http://localhost:3000/comments')
+            .then(response => response.json())
+            .then(data => {
+                console.log('Comments:', data);
 
 const form = document.getElementById('login-form');
 const submitBtn = document.getElementById('submit-btn');
