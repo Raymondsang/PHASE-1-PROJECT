@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
         event.preventDefault();
 
         
-        fetch('https://randomuser.me/api/')
+        fetch('db.json')
             .then(response => response.json())
             .then(data => {
                 
