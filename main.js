@@ -1,31 +1,36 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.querySelector('form');
-    const firstNameInput = document.getElementById('fname');
-    const submitButton = form.querySelector('button[type="submit"]');
+// Add event listeners to the checkboxes and submit buttons in the activity table
+const checkboxes = activityTable.querySelectorAll('input[type="checkbox"]');
+const submitButtons = activityTable.querySelectorAll('input[type="submit"]');
 
-    
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
+checkboxes.forEach((checkbox) => {
+  checkbox.addEventListener('change', (e) => {
+    console.log(`Checkbox ${e.target.id} is ${e.target.checked}`);
+  });
+});
 
-        
-        fetch('db.json')
-            .then(response => response.json())
-            .then(data => {
-                
-                const firstName = data.results[0].name.first;
+submitButtons.forEach((button) => {
+  button.addEventListener('click', (e) => {
+    console.log(`Submit button ${e.target.id} clicked`);
+  });
 
-                
-                firstNameInput.value = firstName;
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-            });
-    });
+  // Add responsiveness to the submit button
+  button.addEventListener('mouseover', () => {
+    button.style.background = 'gold';
+    button.style.cursor = 'pointer';
+  });
 
-   
-    const logoutButton = document.querySelector('button:contains("Logout")');
-    logoutButton.addEventListener('click', function() {
-        // Placeholder action for logout button
-        alert('Logout functionality to be implemented.');
-    });
+  button.addEventListener('mouseout', () => {
+    button.style.background = '';
+    button.style.cursor = '';
+  });
+
+  button.addEventListener('touchstart', () => {
+    button.style.background = 'gold';
+    button.style.cursor = 'pointer';
+  });
+
+  button.addEventListener('touchend', () => {
+    button.style.background = '';
+    button.style.cursor = '';
+  });
 });
